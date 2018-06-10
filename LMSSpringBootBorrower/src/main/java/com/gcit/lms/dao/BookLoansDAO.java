@@ -42,18 +42,18 @@ public class BookLoansDAO extends BaseDAO<BookLoans> implements ResultSetExtract
 	public List<BookLoans> ReadBookLoansByUser(Integer cardNo) throws ClassNotFoundException, SQLException
 	{
 		
-		return mySqlTemplate.query("select * from tbl_book_loans where cardNo= ? and dateIn is NULL",new Object[] {cardNo},this);	
+		return mySqlTemplate.query("select * from tbl_book_loans where cardNo= ? and dateIn is null",new Object[] {cardNo},this);	
 	}
 	
 	public List<BookLoans> ReadAllBookLoans() throws ClassNotFoundException, SQLException
 	{
-		return mySqlTemplate.query("select * from tbl_book_loans where dateIn is null;",this);	
+		return mySqlTemplate.query("select * from tbl_book_loans where dateIn is null",this);	
 	}
 	
 	public void changeDueDate(BookLoans bookLoan) throws ClassNotFoundException, SQLException
 	{
 //		System.out.println(bookLoan.getDueDate());
-		mySqlTemplate.update("update tbl_book_loans set dueDate=? where bookId=? and branchId=? and cardNo=?",new Object[] {bookLoan.getDueDate(),bookLoan.getBookId(),bookLoan.getBranchId(),bookLoan.getCardNo()});
+		mySqlTemplate.update("update tbl_book_loans set dueDate=? where bookId=? and branchId=? and cardNo=? and dateOut=?",new Object[] {bookLoan.getDueDate(),bookLoan.getBookId(),bookLoan.getBranchId(),bookLoan.getCardNo(),bookLoan.getDateOut()});
 	}
 
 	@Override

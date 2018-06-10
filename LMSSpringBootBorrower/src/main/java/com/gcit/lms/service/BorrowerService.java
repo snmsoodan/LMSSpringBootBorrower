@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +61,7 @@ public class BorrowerService {
 	
 	//BookLoan Operations
 	
+	@CrossOrigin
 	@Transactional
 	@RequestMapping(value="/bookLoan",method=RequestMethod.POST,consumes="application/json")
 	public void saveBookLoan(@RequestBody BookLoans bookLoan) throws SQLException
@@ -71,6 +73,7 @@ public class BorrowerService {
 			}
 	}
 	
+	@CrossOrigin
 	@Transactional
 	@RequestMapping(value="/bookLoans",method=RequestMethod.PUT,consumes="application/json")
 	public void returnBookLoan(@RequestParam("bookId") Integer bookId,@RequestParam("branchId") Integer branchId,@RequestParam("cardNo") Integer cardNo,@RequestBody BookLoans bookLoan) throws SQLException //this method updates dateIn 
@@ -83,6 +86,7 @@ public class BorrowerService {
 	}
 	
 	
+	@CrossOrigin
 	@Transactional
 	@RequestMapping(value="/bookLoans/dueDate",method=RequestMethod.PUT, consumes="application/json")
 	public void changeDueDate(@RequestParam("bookId") Integer bookId,@RequestParam("branchId") Integer branchId,@RequestParam("cardNo") Integer cardNo,@RequestBody BookLoans bookloan) throws SQLException, ParseException
@@ -98,7 +102,7 @@ public class BorrowerService {
 	}
 	
 	
-	
+	@CrossOrigin
 	@Transactional
 	@RequestMapping(value="/bookLoans/user/{cardNo}",method=RequestMethod.GET, produces="application/json")
 	public List<BookLoans> ReadBookLoansByUserBranch(@PathVariable("cardNo") Integer cardNo) throws SQLException
@@ -130,7 +134,7 @@ public class BorrowerService {
 	
 	//BookCopies
 	
-	
+	@CrossOrigin
 	@Transactional
 	@RequestMapping(value="/bookCopies",method=RequestMethod.PUT,consumes="application/json")
 	public void loanBookCopies(@RequestParam("bookId") Integer bookId,@RequestParam("branchId") Integer branchId,@RequestBody BookCopies bookCopy) throws SQLException //this method updates noOfCopies
@@ -145,6 +149,7 @@ public class BorrowerService {
 	
 	//Books
 	
+	@CrossOrigin
 	@Transactional
 	@RequestMapping(value="/books/{bookId}",method=RequestMethod.GET, produces="application/json")
 //	public List<Book> ReadBookByBookID(@RequestParam Integer bookId) throws SQLException
@@ -177,7 +182,7 @@ public class BorrowerService {
 	
 	
 	//Borrower
-	
+	@CrossOrigin
 	@Transactional
 	@RequestMapping(value="/borrowers",method=RequestMethod.GET, produces="application/json")
 	public List<Borrower> readBorrower() throws SQLException
@@ -191,8 +196,9 @@ public class BorrowerService {
 		return null;
 	}
 	
+	@CrossOrigin
 	@Transactional
-	@RequestMapping(value="/borrowers/{name}",method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/borrowers/name/{name}",method=RequestMethod.GET, produces="application/json")
 //	public List<Borrower> readBorrowerByName(@RequestParam String name) throws SQLException
 	public List<Borrower> readBorrowerByName(@PathVariable("name") String name) throws SQLException
 	{
@@ -215,6 +221,7 @@ public class BorrowerService {
 	}
 	
 	
+	@CrossOrigin
 	@Transactional
 	@RequestMapping(value="/borrowers/{cardNo}",method=RequestMethod.GET, produces="application/json")
 //	public List<Borrower> readBorrowerById(@PRequestParam Integer cardNo) throws SQLException 
@@ -234,7 +241,7 @@ public class BorrowerService {
 	
 	
 	
-	
+	@CrossOrigin
 	@Transactional
 	@RequestMapping(value="/borrowers/{cardNo}",method=RequestMethod.PUT, consumes="application/json")
 //	public void updateBorrower(@RequestBody Borrower borrower) throws SQLException
@@ -247,8 +254,9 @@ public class BorrowerService {
 			}
 	}
 	
+	@CrossOrigin
 	@Transactional
-	@RequestMapping(value="/borrowers/{cardNo}",method=RequestMethod.DELETE, consumes="application/json")
+	@RequestMapping(value="/borrowers/{cardNo}",method=RequestMethod.DELETE)
 	public void deleteBorrower(@PathVariable("cardNo") Integer cardNo) throws SQLException
 	{
 			try {
@@ -258,6 +266,7 @@ public class BorrowerService {
 			}
 	}
 	
+	@CrossOrigin
 	@Transactional
 	@RequestMapping(value="/borrower",method=RequestMethod.POST, consumes="application/json")
 	public void saveBorrower(@RequestBody Borrower borrower) throws SQLException
